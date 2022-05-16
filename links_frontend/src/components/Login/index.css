@@ -1,0 +1,35 @@
+.wrapper_register .login {
+    height: 400px;
+}
+
+.forgot_password {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.forgot_password a {
+    color: rgba(17, 15, 36, 0.4);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    text-decoration: none;
+}
+
+.checkbox_style{
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    width: 24px;
+    height: 24px;
+    background: #ECECEE;
+    border: 1px solid #ECECEE;
+    margin-inline-end: 8px;
+    border-radius: 4px;
+}
+
+.checkbox_container {
+    display: flex;
+    align-items: center;
+}
