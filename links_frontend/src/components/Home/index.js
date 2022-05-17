@@ -1,11 +1,47 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import ky from "ky";
+import "./index.css";
 
-function Home () {
+function Home() {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  //Validation
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access_token");
 
-    return (
-        <div>
-            <h1>This is the home!</h1>
-        </div>
-    );
+    ky.get(`${process.env.REACT_APP_API_URL}/user`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .json()
+      .then((resp) => {
+        setUser(resp);
+      })
+      .catch((err) => {
+        localStorage.removeItem("access_token");
+        navigate("/login");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [navigate]);
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
+
+  if (!user) {
+    return null;
+  }
+
+  return (
+    <div>
+      <h1>This is the home!</h1>
+    </div>
+  );
 }
 
 export { Home };
