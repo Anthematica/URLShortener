@@ -4,9 +4,19 @@ import { FastField, Form, Formik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import { buildFormikErrors } from "../../utils/build-formik-errors.js";
 import ky from "ky";
+import * as Yup from "yup";
 
 function Login() {
   const navigate = useNavigate();
+
+  //forms validation
+  const SignupSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Required"),
+    password: Yup.string()
+      .min(4, "At least 4 characters are required")
+      .max(16, "Too Long password!")
+      .required("Required"),
+  });
   return (
     <div className="wrapper_register">
       <Formik
@@ -14,6 +24,7 @@ function Login() {
           email: "",
           password: "",
         }}
+        validationSchema={SignupSchema}
         onSubmit={handleSubmit}
       >
         <Form className="sign_form login">

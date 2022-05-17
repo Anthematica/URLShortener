@@ -5,7 +5,7 @@
 
 .wrapper_register {
     background-color:  #F2F2F2;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,7 +13,7 @@
 
 .sign_form {
     width: 400px;
-    height: 496px;
+    height: auto;
     border-radius: 8px;
     background-color: white;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -86,4 +86,16 @@ h1 {
 .navigation {
     text-decoration: none;
     color: #393ED8;
+}
+
+.input_errrors {
+    border: 1px solid red;
+}
+
+.errors {
+    color: red;
+    font-size: 1.4rem;
+    margin-block-end: 6px;
+    display: flex;
+    justify-content: center;
 }

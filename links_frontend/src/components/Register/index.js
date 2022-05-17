@@ -5,9 +5,24 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { buildFormikErrors } from "../../utils/build-formik-errors.js";
 import ky from "ky";
+import * as Yup from "yup";
 
 function Register() {
   const navigate = useNavigate();
+
+  //forms validation
+  const SignupSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(2, "Too Short!")
+      .max(40, "Too Long!")
+      .required("Required"),
+    email: Yup.string().email("Invalid email").required("Required"),
+    password: Yup.string()
+      .min(4, "At least 4 characters are required")
+      .max(16, "Too Long password!")
+      .required("Required"),
+  });
+
   return (
     <div className="wrapper_register">
       <Formik
@@ -16,6 +31,7 @@ function Register() {
           name: "",
           password: "",
         }}
+        validationSchema={SignupSchema}
         onSubmit={handelSubmit}
       >
         <Form className="sign_form">
@@ -30,7 +46,6 @@ function Register() {
                   <br></br>
                   <input className="inputs_styles" {...field} type="text" />
                 </label>
-
                 {!!meta.error && <div className="errors">{meta.error}</div>}
               </div>
             )}
