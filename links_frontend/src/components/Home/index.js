@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ky from "ky";
 import "./index.css";
+import { AsideDashboard } from "../Aside";
 
 function Home() {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ function Home() {
 
   return (
     <div>
-      <h1>This is the home!</h1>
+      <AsideDashboard></AsideDashboard>
     </div>
   );
 }
