@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import ky from "ky";
 import "./index.css";
 import { AsideDashboard } from "../Aside";
+import { Header } from "../Header";
+import { DashboardGraph } from "../DashboardGraph";
+import { Links } from "../Links";
+import { EditLink } from "../EditLink";
 
 function Home() {
   const navigate = useNavigate();
@@ -39,8 +43,16 @@ function Home() {
   }
 
   return (
-    <div>
+    <div className="wrapper_home">
       <AsideDashboard></AsideDashboard>
+      <section className="wrapper_main">
+        <Header></Header>
+        <DashboardGraph></DashboardGraph>
+        <div className="wrapper_links">
+          <Links></Links>
+          <EditLink></EditLink>
+        </div>
+      </section>
     </div>
   );
 }

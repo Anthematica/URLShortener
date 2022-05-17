@@ -1,0 +1,18 @@
+.wrapper_home {
+    display: flex;
+}
+
+.wrapper_main {
+    height: 100vh;
+    background-color: #F2F2F2;
+    width: 100%;
+}
+
+.wrapper_main {
+    padding: 16px 16px;
+}
+
+.wrapper_links {
+    display: flex;
+    column-gap: 16px;
+}

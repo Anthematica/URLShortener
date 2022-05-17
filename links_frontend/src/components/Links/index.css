@@ -1,0 +1,30 @@
+.add_links_container {
+    width: 100%;
+    height: 56px;
+    background-color: #F6F6F9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 16px;
+    border-radius: 4px;  
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.add_links_container h1 {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #110F24; 
+    margin: 0px;
+}
+
+.links_container {
+    width: 770px;
+    margin-block-start: 16px;
+}
+
+.add_links_container button {
+    width: 32px;
+    height: 32px;
+    border: none;
+    cursor: pointer;
+}
