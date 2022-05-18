@@ -7,11 +7,15 @@ import { Header } from "../Header";
 import { DashboardGraph } from "../DashboardGraph";
 import { Links } from "../Links";
 import { EditLink } from "../EditLink";
+import { AddLinkModal } from "../Modal";
 
 function Home() {
   const navigate = useNavigate();
+
+  const [toggle, setToggle] = useState(false);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+
   //Validation
   useEffect(() => {
     const accessToken = localStorage.getItem("access_token");
@@ -49,8 +53,9 @@ function Home() {
         <Header></Header>
         <DashboardGraph></DashboardGraph>
         <div className="wrapper_links">
-          <Links></Links>
+          <Links toggle={setToggle}></Links>
           <EditLink></EditLink>
+          {toggle && <AddLinkModal toggle={setToggle}></AddLinkModal>}
         </div>
       </section>
     </div>

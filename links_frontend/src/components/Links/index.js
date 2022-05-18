@@ -1,12 +1,12 @@
 import React from "react";
 import "./index.css";
 
-function Links() {
+function Links({ toggle }) {
   return (
     <div className="links_container">
       <div className="add_links_container">
         <h1>Links</h1>
-        <button>
+        <button onClick={() => toggle(true)}>
           <svg
             width="10"
             height="10"
