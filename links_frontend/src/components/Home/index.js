@@ -15,6 +15,23 @@ function Home() {
   const [toggle, setToggle] = useState(false);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [links, setLinks] = useState([]);
+
+  //Links
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access_token");
+    (async function get_links() {
+      const resp = await ky
+        .get(`${process.env.REACT_APP_API_URL}/v1/links`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .json();
+
+      setLinks(resp.data);
+    })();
+  }, []);
 
   //Validation
   useEffect(() => {
@@ -53,9 +70,16 @@ function Home() {
         <Header></Header>
         <DashboardGraph></DashboardGraph>
         <div className="wrapper_links">
-          <Links toggle={setToggle}></Links>
+          <Links toggle={setToggle} links={links}></Links>
           <EditLink></EditLink>
-          {toggle && <AddLinkModal toggle={setToggle}></AddLinkModal>}
+          {toggle && (
+            <AddLinkModal
+              toggle={setToggle}
+              user={user}
+              links={links}
+              setLinks={setLinks}
+            ></AddLinkModal>
+          )}
         </div>
       </section>
     </div>

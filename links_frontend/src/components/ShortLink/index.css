@@ -1,0 +1,45 @@
+.shorter_links_container {
+    height: 56px;
+    background-color: white;
+    border-block-end: 1px solid rgba(17, 15, 36, 0.4);
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 16px;
+    align-items: center;
+}
+
+.short_link_info {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox_simulate {
+    width: 24px;
+    height: 24px;
+    background-color: #ECECEE;
+    border-radius: 4px;
+    margin-inline-end: 8px;
+}
+
+.short_link {
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.big_link {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: rgba(17, 15, 36, 0.4);
+}
+
+.link_extra_info {
+    display: flex;
+    column-gap: 16px;
+}
+
+.link_extra_info p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: rgba(17, 15, 36, 0.4);
+}

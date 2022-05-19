@@ -20,6 +20,12 @@
 .links_container {
     width: 70%;
     margin-block-start: 16px;
+   
+}
+
+.scroll_container {
+    height: 200px;
+    overflow-y: scroll;
 }
 
 .add_links_container button {

@@ -1,7 +1,9 @@
 import React from "react";
 import "./index.css";
+import { ShortLink } from "../ShortLink";
+import { useEffect, useState } from "react";
 
-function Links({ toggle }) {
+function Links({ toggle, links }) {
   return (
     <div className="links_container">
       <div className="add_links_container">
@@ -22,6 +24,11 @@ function Links({ toggle }) {
             />
           </svg>
         </button>
+      </div>
+      <div className="scroll_container">
+        {links.map((item) => {
+          return <ShortLink key={item.id} links={item}></ShortLink>;
+        })}
       </div>
     </div>
   );
