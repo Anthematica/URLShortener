@@ -9,7 +9,7 @@ class LinkVisit extends Model
 {
     use HasFactory;
 
-
+    protected $guarded = [];
     function link()
     {
         return $this->belongsTo(Link::class);

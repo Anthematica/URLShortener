@@ -14,7 +14,7 @@ function ShortLink({ links }) {
       </div>
       <div className="link_extra_info">
         <p className="link_extra_info_date">Today</p>
-        <p className="link_extra_info_views">100 views</p>
+        <p className="link_extra_info_views">{links.visits} views</p>
       </div>
     </div>
   );

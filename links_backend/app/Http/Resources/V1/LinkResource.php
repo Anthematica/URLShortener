@@ -15,13 +15,14 @@ class LinkResource extends JsonResource
     public function toArray($request)
     {
 
-        return parent::toArray($request);
-        // return [
-        //     'id' => $this->id,
-        //     'short_link' => url('s/' . $this->short_link),
-        //     'link' => $this->link,
-        //     'user_id' => $this->whenLoaded('user'),
-        //     'created_at' => $this->created_at,
-        // ];
+        // return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'short_link' => url('s/' . $this->short_link),
+            'link' => $this->link,
+            'user_id' => $this->whenLoaded('user'),
+            'visits' => $this->whenLoaded('link_visit')->count(),
+            'created_at' => $this->created_at,
+        ];
     }
 }
