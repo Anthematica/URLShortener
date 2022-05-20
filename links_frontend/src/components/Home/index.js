@@ -33,6 +33,22 @@ function Home() {
     })();
   }, []);
 
+  //Consultas por mes
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access_token");
+    (async function get_visits() {
+      const resp = await ky
+        .get(`${process.env.REACT_APP_API_URL}/linkVisits`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .json();
+
+      console.log(resp.data);
+    })();
+  }, []);
+
   //Validation
   useEffect(() => {
     const accessToken = localStorage.getItem("access_token");

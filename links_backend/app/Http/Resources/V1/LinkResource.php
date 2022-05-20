@@ -21,7 +21,9 @@ class LinkResource extends JsonResource
             'short_link' => url('s/' . $this->short_link),
             'link' => $this->link,
             'user_id' => $this->whenLoaded('user'),
-            'visits' => $this->whenLoaded('link_visit')->count(),
+            'visits' => $this->whenLoaded('link_visit', function () {
+                return $this->link_visit->count();
+            }),
             'created_at' => $this->created_at,
         ];
     }
