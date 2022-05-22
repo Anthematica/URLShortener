@@ -2,8 +2,9 @@ import React from "react";
 import "./index.css";
 import { ShortLink } from "../ShortLink";
 import { useEffect, useState } from "react";
+import ky from "ky";
 
-function Links({ toggle, links }) {
+function Links({ toggle, links, toggleLinksDelete }) {
   return (
     <div className="links_container">
       <div className="add_links_container">
@@ -27,7 +28,13 @@ function Links({ toggle, links }) {
       </div>
       <div className="scroll_container">
         {links.map((item) => {
-          return <ShortLink key={item.id} links={item}></ShortLink>;
+          return (
+            <ShortLink
+              key={item.id}
+              links={item}
+              toggleLinksDelete={toggleLinksDelete}
+            ></ShortLink>
+          );
         })}
       </div>
     </div>

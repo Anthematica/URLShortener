@@ -8,14 +8,17 @@ import { DashboardGraph } from "../DashboardGraph";
 import { Links } from "../Links";
 import { EditLink } from "../EditLink";
 import { AddLinkModal } from "../Modal";
+import { ModalDelete } from "../ModalDelete";
 
 function Home() {
   const navigate = useNavigate();
 
   const [toggle, setToggle] = useState(false);
+  const [toggleDelete, setToggleDelete] = useState(false);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [links, setLinks] = useState([]);
+  const [currenIdLink, setIdLink] = useState(null);
 
   //Links
   useEffect(() => {
@@ -33,21 +36,21 @@ function Home() {
     })();
   }, []);
 
-  //Consultas por mes
-  useEffect(() => {
-    const accessToken = localStorage.getItem("access_token");
-    (async function get_visits() {
-      const resp = await ky
-        .get(`${process.env.REACT_APP_API_URL}/linkVisits`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        .json();
+  // //Consultas por mes
+  // useEffect(() => {
+  //   const accessToken = localStorage.getItem("access_token");
+  //   (async function get_visits() {
+  //     const resp = await ky
+  //       .get(`${process.env.REACT_APP_API_URL}/linkVisits`, {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       })
+  //       .json();
 
-      console.log(resp.data);
-    })();
-  }, []);
+  //     console.log(resp.data);
+  //   })();
+  // }, []);
 
   //Validation
   useEffect(() => {
@@ -86,7 +89,12 @@ function Home() {
         <Header></Header>
         <DashboardGraph></DashboardGraph>
         <div className="wrapper_links">
-          <Links toggle={setToggle} links={links}></Links>
+          <Links
+            toggle={setToggle}
+            links={links}
+            setLinks={setLinks}
+            toggleLinksDelete={toggleLinksDelete}
+          ></Links>
           <EditLink></EditLink>
           {toggle && (
             <AddLinkModal
@@ -96,10 +104,32 @@ function Home() {
               setLinks={setLinks}
             ></AddLinkModal>
           )}
+
+          {toggleDelete && (
+            <ModalDelete
+              handleDelete={handleDelete}
+              setToggleDelete={setToggleDelete}
+            ></ModalDelete>
+          )}
         </div>
       </section>
     </div>
   );
+
+  function toggleLinksDelete(id) {
+    setIdLink(id);
+    console.log(setIdLink);
+    setToggleDelete(true);
+  }
+
+  async function handleDelete() {
+    console.log("Desde el delete", currenIdLink);
+    const resp = await ky
+      .delete(`http://localhost:8000/api/v1/links/${currenIdLink}`)
+      .json();
+    setLinks((links) => links.filter((link) => link.id !== currenIdLink));
+    setToggleDelete(false);
+  }
 }
 
 export { Home };

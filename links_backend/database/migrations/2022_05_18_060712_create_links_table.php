@@ -15,6 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('link')->unique();
             $table->string('short_link')->unique();
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
