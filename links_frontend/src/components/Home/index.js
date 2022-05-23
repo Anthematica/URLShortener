@@ -19,6 +19,8 @@ function Home() {
   const [user, setUser] = useState(null);
   const [links, setLinks] = useState([]);
   const [currenIdLink, setIdLink] = useState(null);
+  const [editToggle, setEditToggle] = useState(false);
+  const [currentEditLink, setCurrentEditLink] = useState([]);
 
   //Links
   useEffect(() => {
@@ -81,7 +83,6 @@ function Home() {
   if (!user) {
     return null;
   }
-
   return (
     <div className="wrapper_home">
       <AsideDashboard></AsideDashboard>
@@ -94,8 +95,14 @@ function Home() {
             links={links}
             setLinks={setLinks}
             toggleLinksDelete={toggleLinksDelete}
+            setEditToggle={setEditToggle}
+            setCurrentEditLink={setCurrentEditLink}
           ></Links>
-          <EditLink></EditLink>
+          <EditLink
+            editToggle={editToggle}
+            setEditToggle={setEditToggle}
+            currentEditLink={currentEditLink}
+          ></EditLink>
           {toggle && (
             <AddLinkModal
               toggle={setToggle}

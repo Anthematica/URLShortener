@@ -4,7 +4,13 @@ import { ShortLink } from "../ShortLink";
 import { useEffect, useState } from "react";
 import ky from "ky";
 
-function Links({ toggle, links, toggleLinksDelete }) {
+function Links({
+  toggle,
+  links,
+  toggleLinksDelete,
+  setEditToggle,
+  setCurrentEditLink,
+}) {
   return (
     <div className="links_container">
       <div className="add_links_container">
@@ -33,6 +39,8 @@ function Links({ toggle, links, toggleLinksDelete }) {
               key={item.id}
               links={item}
               toggleLinksDelete={toggleLinksDelete}
+              setEditToggle={setEditToggle}
+              setCurrentEditLink={setCurrentEditLink}
             ></ShortLink>
           );
         })}

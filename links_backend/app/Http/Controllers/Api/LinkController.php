@@ -53,6 +53,23 @@ class LinkController extends Controller
         return redirect($short_link->link);
     }
 
+    public function update(Request $request, $id)
+    {
+        $data = $request->validate(
+            [
+                'link' => ['required'],
+            ]
+        );
+
+        $link = Link::find($id)->update($data);
+
+
+        // $link->load('user');
+        // $link->load('link_visit');
+
+        return LinkResource::make($link);
+    }
+
     public function destroy($id)
     {
         Link::find($id)->delete();

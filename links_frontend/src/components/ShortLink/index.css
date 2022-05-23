@@ -8,17 +8,25 @@
     align-items: center;
 }
 
+.icon_delete_container svg{
+    cursor: pointer;
+}
+
+
 .short_link_info {
     display: flex;
     align-items: center;
 }
 
 .checkbox_simulate {
-    width: 24px;
-    height: 24px;
-    background-color: #ECECEE;
-    border-radius: 4px;
-    margin-inline-end: 8px;
+    width: 18px;
+    height: 18px;
+    margin-inline-end: 10px;
+    cursor: pointer;
+}
+
+.checkbox_simulate svg {
+    fill:#a09fa7;
 }
 
 .short_link {
