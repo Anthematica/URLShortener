@@ -53,7 +53,7 @@ class LinkController extends Controller
         return redirect($short_link->link);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, Link $link)
     {
         $data = $request->validate(
             [
@@ -61,13 +61,12 @@ class LinkController extends Controller
             ]
         );
 
-        $link = Link::find($id)->update($data);
+        $link->find($id)->update($data);
 
+        $link->load('user');
+        $link->load('link_visit');
 
-        // $link->load('user');
-        // $link->load('link_visit');
-
-        return LinkResource::make($link);
+        return LinkResource::collection($link->get());
     }
 
     public function destroy($id)

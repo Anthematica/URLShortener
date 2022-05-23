@@ -97,11 +97,14 @@ function Home() {
             toggleLinksDelete={toggleLinksDelete}
             setEditToggle={setEditToggle}
             setCurrentEditLink={setCurrentEditLink}
+            loading={loading}
           ></Links>
           <EditLink
             editToggle={editToggle}
             setEditToggle={setEditToggle}
             currentEditLink={currentEditLink}
+            links={links}
+            setLinks={setLinks}
           ></EditLink>
           {toggle && (
             <AddLinkModal
