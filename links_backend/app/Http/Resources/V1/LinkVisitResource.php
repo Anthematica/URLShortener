@@ -14,6 +14,12 @@ class LinkVisitResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'short_link' => url('s/' . $this->short_link),
+            'link' => $this->link,
+            'link_id' => $this->whenLoaded('link_visit'),
+            'created_at' => $this->created_at,
+        ];
     }
 }

@@ -1,8 +1,7 @@
 import React from "react";
 import "./index.css";
 import { ShortLink } from "../ShortLink";
-import { useEffect, useState } from "react";
-import ky from "ky";
+import { LinksLoading } from "../LinkLoading";
 
 function Links({
   toggle,
@@ -10,6 +9,7 @@ function Links({
   toggleLinksDelete,
   setEditToggle,
   setCurrentEditLink,
+  loading,
 }) {
   return (
     <div className="links_container">
@@ -33,6 +33,10 @@ function Links({
         </button>
       </div>
       <div className="scroll_container">
+        {loading &&
+          new Array(5).fill().map((item, index) => {
+            return <LinksLoading key={index}></LinksLoading>;
+          })}
         {links.map((item) => {
           return (
             <ShortLink

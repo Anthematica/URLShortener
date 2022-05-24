@@ -26,7 +26,6 @@ function EditLinks({ setEditToggle, currentEditLink, links, setLinks }) {
     setLinks((links) => {
       return links.map((link, i) => {
         if (link.id === id) {
-          console.log("Llega aqui?", resp.data[i]);
           return {
             ...link,
             ...resp.data[i],
@@ -43,7 +42,7 @@ function EditLinks({ setEditToggle, currentEditLink, links, setLinks }) {
     <div className="edit_link_container">
       <Formik
         initialValues={{
-          link: "",
+          link: currentEditLink.link,
         }}
         onSubmit={(values, { resetForm }) => {
           handleChange(currentEditLink.id, values);

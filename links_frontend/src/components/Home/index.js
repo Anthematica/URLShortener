@@ -25,34 +25,38 @@ function Home() {
   //Links
   useEffect(() => {
     const accessToken = localStorage.getItem("access_token");
-    (async function get_links() {
+
+    setTimeout(() => {
+      (async function get_links() {
+        const resp = await ky
+          .get(`${process.env.REACT_APP_API_URL}/v1/links`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          })
+          .json();
+
+        setLinks(resp.data);
+      })();
+      setLoading(false);
+    }, 4000);
+  }, []);
+
+  //Consultas por mes
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access_token");
+    (async function get_visits() {
       const resp = await ky
-        .get(`${process.env.REACT_APP_API_URL}/v1/links`, {
+        .get(`${process.env.REACT_APP_API_URL}/linkVisits`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         })
         .json();
 
-      setLinks(resp.data);
+      console.log(resp.data);
     })();
   }, []);
-
-  // //Consultas por mes
-  // useEffect(() => {
-  //   const accessToken = localStorage.getItem("access_token");
-  //   (async function get_visits() {
-  //     const resp = await ky
-  //       .get(`${process.env.REACT_APP_API_URL}/linkVisits`, {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //         },
-  //       })
-  //       .json();
-
-  //     console.log(resp.data);
-  //   })();
-  // }, []);
 
   //Validation
   useEffect(() => {
@@ -72,13 +76,9 @@ function Home() {
         navigate("/login");
       })
       .finally(() => {
-        setLoading(false);
+        // setLoading(false);
       });
   }, [navigate]);
-
-  if (loading) {
-    return <div>loading...</div>;
-  }
 
   if (!user) {
     return null;

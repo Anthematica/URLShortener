@@ -7,6 +7,7 @@ use App\Http\Resources\V1\LinkVisitResource;
 use App\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LinkVisitContoller extends Controller
 {
@@ -14,9 +15,11 @@ class LinkVisitContoller extends Controller
     {
         $auth = Auth::id();
 
-        $query = Link::with('user', 'link_visit')
-            ->where('user_id', "=", $auth)->groupBy('link_visit.created_at')->get();
 
-        return LinkVisitResource::make($query);
+        $query = Link::with(['link_visit' => function ($visits) {
+            $visits->select('created_at')->groupBy();
+        }])->where('user_id', "=", $auth)->get();
+
+        return LinkVisitResource::collection($query);
     }
 }

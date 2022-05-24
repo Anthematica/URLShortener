@@ -19,11 +19,6 @@ class LinkController extends Controller
     {
         $auth_id = Auth::id();
 
-        // if ($request->has('trashed')) {
-        //     return LinkResource::collection(Link::onlyTrashed()->get());
-        // } else {
-        //     return LinkResource::collection(Link::with('user', 'link_visit')->where('user_id', '=', $auth_id)->get());
-        // }
         return LinkResource::collection(Link::with('user', 'link_visit')->where('user_id', '=', $auth_id)->get());
     }
 
