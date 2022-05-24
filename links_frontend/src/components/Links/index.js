@@ -10,6 +10,7 @@ function Links({
   setEditToggle,
   setCurrentEditLink,
   loading,
+  setLoading,
 }) {
   return (
     <div className="links_container">
