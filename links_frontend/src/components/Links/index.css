@@ -24,7 +24,7 @@
 }
 
 .scroll_container {
-    height: 200px;
+    max-height: 200px; 
     overflow-y: scroll;
 }
 
@@ -33,4 +33,20 @@
     height: 32px;
     border: none;
     cursor: pointer;
+    z-index: 1;
+}
+
+@media (min-width: 1024px) {
+    .scroll_container {
+        max-height: 100px;
+    }
+
+    
+}
+
+@media (max-width: 768px) {
+    .links_container {
+        width: 100%;
+    }
+
 }

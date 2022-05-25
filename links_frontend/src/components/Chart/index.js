@@ -1,6 +1,20 @@
 import { ResponsiveBar } from "@nivo/bar";
+import { useState } from "react";
 
 function Chart({ queryMonth }) {
+  const graphContainer = document.querySelector(".graph_container");
+  const [graphContainerWidh, setContainerWidh] = useState(false);
+
+  console.log("Probar valor", graphContainer);
+
+  // if (graphContainer) {
+  //   if (graphContainer.clientWidth <= 768) {
+  //     setContainerWidh(true);
+  //   } else {
+  //     setContainerWidh(false);
+  //   }
+  // }
+
   const Labelmonth = [
     "January",
     "February",
@@ -38,15 +52,15 @@ function Chart({ queryMonth }) {
 
     return item;
   });
-
   return (
     <ResponsiveBar
       data={data}
       keys={["visits"]}
       indexBy="month"
-      margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+      margin={{ top: 16, right: 20, bottom: 90, left: 50 }}
       padding={0.4}
       valueScale={{ type: "linear" }}
+      borderRadius={3}
       colors="#3182CE"
       animate={true}
       enableLabel={false}
@@ -56,10 +70,10 @@ function Chart({ queryMonth }) {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "visits",
         legendPosition: "middle",
         legendOffset: -40,
       }}
+      axisBottom={{ tickRotation: graphContainerWidh ? -45 : 0 }}
     />
   );
 }

@@ -16,3 +16,13 @@
     display: flex;
     column-gap: 16px;
 }
+
+@media (max-width: 768px) {
+    .wrapper_home {
+        flex-direction: column;
+    }
+    .wrapper_links {
+        flex-wrap: wrap;
+    }
+
+}

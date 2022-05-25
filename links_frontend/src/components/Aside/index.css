@@ -15,7 +15,7 @@
 
 .aside_container h1 {
     font-weight: 700;
-    font-size: 1.2rem;    
+    font-size: 1.2rem;
     color: rgba(255, 255, 255, 0.4);
     text-transform: uppercase;
     align-self: flex-start;
@@ -31,9 +31,43 @@
     align-items: center;
 }
 
+.hamburger_menu {
+    display: none;
+}
+
 .links_button_container h2 {
     font-weight: 400;
     font-size: 1.4rem;
     color: white;
     margin-inline-start: 6px;
 }
+
+@media (max-width: 768px) {
+    .aside_container {
+      height: 56px;
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+      
+    }
+
+    .logo_container {
+        margin: 0px;
+    }
+
+    .links_button_container {
+        display: none;
+    }
+
+    .links_button_container h2 {
+        display: none;
+    }
+
+    .hamburger_menu {
+        display: inline-block;
+    }
+
+    .aside_container h1 {
+        display: none;
+    }
+  }

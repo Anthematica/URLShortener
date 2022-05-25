@@ -26,3 +26,10 @@
 .edit_link_buttons_container .edit_link_button_cancel {
     background-color: #E53E3E;
 }
+
+@media (max-width: 768px) {
+    .edit_link  {
+        width: 100%;
+    }
+
+}
