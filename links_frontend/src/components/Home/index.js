@@ -21,6 +21,7 @@ function Home() {
   const [currenIdLink, setIdLink] = useState(null);
   const [editToggle, setEditToggle] = useState(false);
   const [currentEditLink, setCurrentEditLink] = useState([]);
+  const [queryMonth, setQueryMonth] = useState([]);
 
   //Links
   useEffect(() => {
@@ -54,6 +55,7 @@ function Home() {
         })
         .json();
 
+      setQueryMonth(resp);
       console.log("Visitas por mes", resp);
     })();
   }, []);
@@ -88,7 +90,7 @@ function Home() {
       <AsideDashboard></AsideDashboard>
       <section className="wrapper_main">
         <Header></Header>
-        <DashboardGraph></DashboardGraph>
+        <DashboardGraph queryMonth={queryMonth}></DashboardGraph>
         <div className="wrapper_links">
           <Links
             toggle={setToggle}
