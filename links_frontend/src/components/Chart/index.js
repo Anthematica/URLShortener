@@ -1,19 +1,23 @@
 import { ResponsiveBar } from "@nivo/bar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Chart({ queryMonth }) {
-  const graphContainer = document.querySelector(".graph_container");
-  const [graphContainerWidh, setContainerWidh] = useState(false);
+  const [windowContainerWidth, setWindowContainerWidth] = useState(false);
 
-  console.log("Probar valor", graphContainer);
-
-  // if (graphContainer) {
-  //   if (graphContainer.clientWidth <= 768) {
-  //     setContainerWidh(true);
-  //   } else {
-  //     setContainerWidh(false);
-  //   }
-  // }
+  useEffect(() => {
+    function addMQListener (mql, callback) {
+      if(mql.addEventListener) {
+        mql.addEventListener("change", callback);
+      } else {
+        mql.addListener(callback);
+      }
+    }
+  
+    addMQListener(window.matchMedia('(max-width: 768px)'), event =>{ 
+        setWindowContainerWidth(event.matches);
+    
+    });
+  }, []);
 
   const Labelmonth = [
     "January",
@@ -73,7 +77,7 @@ function Chart({ queryMonth }) {
         legendPosition: "middle",
         legendOffset: -40,
       }}
-      axisBottom={{ tickRotation: graphContainerWidh ? -45 : 0 }}
+      axisBottom={{ tickRotation: windowContainerWidth ? -45 : 0 }}
     />
   );
 }
