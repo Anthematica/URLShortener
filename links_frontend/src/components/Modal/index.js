@@ -7,10 +7,13 @@ import { buildFormikErrors } from "../../utils/build-formik-errors.js";
 
 function AddLinkModal({ toggle, user, setLinks, links }) {
   //forms validation
+  const URL = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/;
+
   const SignupSchema = Yup.object().shape({
     link: Yup.string()
       .min(4, "At least 4 characters are required")
-      .required("Required"),
+      .required("Required")
+      .matches(URL, "Enter correct url!"),
   });
   return (
     <div className="modal_wrapper">

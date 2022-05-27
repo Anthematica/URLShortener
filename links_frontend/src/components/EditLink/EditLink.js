@@ -6,11 +6,13 @@ import "./index.css";
 import { buildFormikErrors } from "../../utils/build-formik-errors.js";
 
 function EditLinks({ setEditToggle, currentEditLink, links, setLinks }) {
+  const URL = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/;
   //forms validation
   const SignupSchema = Yup.object().shape({
     link: Yup.string()
       .min(10, "At least 4 characters are required")
-      .required("Required"),
+      .required("Required")
+      .matches(URL, "Enter correct url!"),
   });
 
   async function handleChange(id, values, formikBag) {
