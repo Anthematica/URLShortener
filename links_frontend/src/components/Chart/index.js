@@ -5,17 +5,16 @@ function Chart({ queryMonth }) {
   const [windowContainerWidth, setWindowContainerWidth] = useState(false);
 
   useEffect(() => {
-    function addMQListener (mql, callback) {
-      if(mql.addEventListener) {
+    function addMQListener(mql, callback) {
+      if (mql.addEventListener) {
         mql.addEventListener("change", callback);
       } else {
         mql.addListener(callback);
       }
     }
-  
-    addMQListener(window.matchMedia('(max-width: 768px)'), event =>{ 
-        setWindowContainerWidth(event.matches);
-    
+
+    addMQListener(window.matchMedia("(max-width: 768px)"), (event) => {
+      setWindowContainerWidth(event.matches);
     });
   }, []);
 
@@ -60,6 +59,9 @@ function Chart({ queryMonth }) {
     <ResponsiveBar
       data={data}
       keys={["visits"]}
+      theme={{
+        axis: { ticks: { text: { fontSize: windowContainerWidth ? 6 : 11 } } },
+      }}
       indexBy="month"
       margin={{ top: 16, right: 20, bottom: 90, left: 50 }}
       padding={0.4}
@@ -77,7 +79,9 @@ function Chart({ queryMonth }) {
         legendPosition: "middle",
         legendOffset: -40,
       }}
-      axisBottom={{ tickRotation: windowContainerWidth ? -45 : 0 }}
+      axisBottom={{
+        tickRotation: windowContainerWidth ? -45 : 0,
+      }}
     />
   );
 }

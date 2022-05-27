@@ -26,7 +26,7 @@ class LinkController extends Controller
     {
         $data = $request->validate(
             [
-                'link' => ['required'],
+                'link' => ['required', 'url'],
                 'user_id' => ['required'],
             ]
         );
@@ -52,7 +52,7 @@ class LinkController extends Controller
     {
         $data = $request->validate(
             [
-                'link' => ['required'],
+                'link' => ['required', 'url'],
             ]
         );
 

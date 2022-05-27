@@ -3,6 +3,7 @@ import "./index.css";
 import { FastField, Form, Formik } from "formik";
 import ky from "ky";
 import * as Yup from "yup";
+import { buildFormikErrors } from "../../utils/build-formik-errors.js";
 
 function AddLinkModal({ toggle, user, setLinks, links }) {
   //forms validation
@@ -53,12 +54,20 @@ function AddLinkModal({ toggle, user, setLinks, links }) {
     </div>
   );
 
-  async function handleSubmit(values) {
+  async function handleSubmit(values, formikBag) {
     const resp = await ky
       .post(`${process.env.REACT_APP_API_URL}/v1/links`, {
         json: { ...values, user_id: user.id },
       })
       .json();
+
+    if (resp.errors) {
+      const errors = buildFormikErrors(resp.errors);
+
+      formikBag.setErrors(errors);
+
+      return;
+    }
 
     setLinks([...links, resp.data]);
   }

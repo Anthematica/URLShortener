@@ -58,7 +58,7 @@ function Login() {
               </div>
             )}
           </FastField>
-          <FastField name="password">
+          <FastField name="checkbox">
             {({ field, meta }) => (
               <div>
                 <label className="label_title checkbox_container">
@@ -69,7 +69,6 @@ function Login() {
                   />
                   Remeber me
                 </label>
-                {!!meta.error && <div className="errors">{meta.error}</div>}
               </div>
             )}
           </FastField>

@@ -1,11 +1,14 @@
 .wrapper_home {
-    display: flex;
+    display: flex; 
+    min-height: 100vh;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 
 .wrapper_main {
-    height: 100vh;
     background-color: #F2F2F2;
     width: 100%;
+    min-height: 100vh;
 }
 
 .wrapper_main {

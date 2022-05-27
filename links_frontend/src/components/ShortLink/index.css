@@ -32,6 +32,7 @@
 .short_link {
     font-size: 1.6rem;
     font-weight: 400;
+    margin-block-end: 4px;
 }
 
 .big_link {
@@ -52,7 +53,7 @@
     color: rgba(17, 15, 36, 0.4);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1070px) {
     .big_link {
         width: 100px;
         text-overflow:ellipsis;
@@ -76,9 +77,14 @@
 
 @media (max-width: 370px) {
     .short_link {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
     .link_extra_info p {
         font-size: 0.8rem;
+    }
+
+    .shorter_links_container  svg{
+        width: 14px;
+        height: 14px;
     }
 }

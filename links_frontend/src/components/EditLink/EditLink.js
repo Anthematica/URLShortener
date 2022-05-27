@@ -3,6 +3,7 @@ import { FastField, Form, Formik } from "formik";
 import ky from "ky";
 import * as Yup from "yup";
 import "./index.css";
+import { buildFormikErrors } from "../../utils/build-formik-errors.js";
 
 function EditLinks({ setEditToggle, currentEditLink, links, setLinks }) {
   //forms validation
@@ -12,7 +13,7 @@ function EditLinks({ setEditToggle, currentEditLink, links, setLinks }) {
       .required("Required"),
   });
 
-  async function handleChange(id, values) {
+  async function handleChange(id, values, formikBag) {
     const resp = await ky
       .patch(`${process.env.REACT_APP_API_URL}/v1/links/${id}`, {
         json: {
@@ -21,7 +22,13 @@ function EditLinks({ setEditToggle, currentEditLink, links, setLinks }) {
       })
       .json();
 
-    console.log("Que responde el update antes del set", resp.data);
+    if (resp.errors) {
+      const errors = buildFormikErrors(resp.errors);
+
+      formikBag.setErrors(errors);
+
+      return;
+    }
 
     setLinks((links) => {
       return links.map((link, i) => {

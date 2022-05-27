@@ -56,7 +56,6 @@ function Home() {
         .json();
 
       setQueryMonth(resp);
-      console.log("Visitas por mes", resp);
     })();
   }, []);
 
