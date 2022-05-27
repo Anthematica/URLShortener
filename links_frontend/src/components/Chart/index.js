@@ -5,17 +5,15 @@ function Chart({ queryMonth }) {
   const [windowContainerWidth, setWindowContainerWidth] = useState(false);
 
   useEffect(() => {
-    function addMQListener(mql, callback) {
-      if (mql.addEventListener) {
-        mql.addEventListener("change", callback);
-      } else {
-        mql.addListener(callback);
-      }
+    const media = window.matchMedia("(max-width: 768px)");
+
+    function callback(e) {
+      setWindowContainerWidth(e.matches);
     }
 
-    addMQListener(window.matchMedia("(max-width: 768px)"), (event) => {
-      setWindowContainerWidth(event.matches);
-    });
+    media.addEventListener("change", callback);
+
+    return () => media.removeEventListener("change", callback);
   }, []);
 
   const Labelmonth = [
@@ -59,9 +57,9 @@ function Chart({ queryMonth }) {
     <ResponsiveBar
       data={data}
       keys={["visits"]}
-      theme={{
-        axis: { ticks: { text: { fontSize: windowContainerWidth ? 6 : 11 } } },
-      }}
+      // theme={{
+      //   axis: { ticks: { text: { fontSize: windowContainerWidth ? 6 : 11 } } },
+      // }}
       indexBy="month"
       margin={{ top: 16, right: 20, bottom: 90, left: 50 }}
       padding={0.4}

@@ -27,7 +27,6 @@ function AddLinkModal({ toggle, user, setLinks, links }) {
         <Formik
           initialValues={{
             link: "",
-            user_id: "",
           }}
           onSubmit={(values, { resetForm }) => {
             handleSubmit(values);
@@ -58,9 +57,13 @@ function AddLinkModal({ toggle, user, setLinks, links }) {
   );
 
   async function handleSubmit(values, formikBag) {
+    const accessToken = localStorage.getItem("access_token");
     const resp = await ky
       .post(`${process.env.REACT_APP_API_URL}/v1/links`, {
-        json: { ...values, user_id: user.id },
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        json: { ...values },
       })
       .json();
 

@@ -24,12 +24,15 @@ class LinkController extends Controller
 
     public function store(Request $request)
     {
+        $auth_id = Auth::id();
+
         $data = $request->validate(
             [
                 'link' => ['required', 'url'],
-                'user_id' => ['required'],
             ]
         );
+
+        $data['user_id'] = $auth_id;
 
         $data['short_link'] = Str::random(6);
 
@@ -40,7 +43,7 @@ class LinkController extends Controller
 
     public function redirectLink(Request $request, $url)
     {
-        $short_link = Link::where('short_link', '=', $url)->first();
+        $short_link = Link::where('short_link', '=', $url)->firstOrFail();
 
         //Create a visit in the link_visit table
         LinkVisit::create(['link_id' => $short_link->id]);
@@ -48,7 +51,7 @@ class LinkController extends Controller
         return redirect($short_link->link);
     }
 
-    public function update(Request $request, $id, Link $link)
+    public function update(Request $request, Link $link)
     {
         $data = $request->validate(
             [
@@ -56,7 +59,7 @@ class LinkController extends Controller
             ]
         );
 
-        $link->find($id)->update($data);
+        $link->update($data);
 
         $link->load('user');
         $link->load('link_visit');

@@ -1,6 +1,6 @@
 function buildFormikErrors(errors) {
-  return Object.entries(errors).reduce((acc, [field, errors]) => {
-    acc[field] = errors[0];
+  return Object.entries(errors).reduce((acc, [field, [error]]) => {
+    acc[field] = error;
 
     return acc;
   }, {});

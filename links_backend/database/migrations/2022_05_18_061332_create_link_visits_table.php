@@ -12,7 +12,6 @@ return new class extends Migration
         Schema::create('link_visits', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('link_id');
-
             $table->foreign('link_id')->references('id')->on('links');
             $table->timestamps();
         });

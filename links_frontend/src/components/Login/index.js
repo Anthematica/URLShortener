@@ -10,7 +10,7 @@ function Login() {
   const navigate = useNavigate();
 
   //forms validation
-  const SignupSchema = Yup.object().shape({
+  const SignupSchema = Yup.object({
     email: Yup.string().email("Invalid email").required("Required"),
     password: Yup.string()
       .min(4, "At least 4 characters are required")
@@ -48,7 +48,7 @@ function Login() {
               <div>
                 <label className="label_title">
                   <div className="forgot_password">
-                    <p>Password</p>
+                    <p>Password:</p>
                     <Link to="#">Forgot password?</Link>
                   </div>
                   <input className="inputs_styles" {...field} type="password" />
@@ -59,7 +59,7 @@ function Login() {
             )}
           </FastField>
           <FastField name="checkbox">
-            {({ field, meta }) => (
+            {({ field }) => (
               <div>
                 <label className="label_title checkbox_container">
                   <input
@@ -67,7 +67,7 @@ function Login() {
                     {...field}
                     type="checkbox"
                   />
-                  Remeber me
+                  Remember me
                 </label>
               </div>
             )}
